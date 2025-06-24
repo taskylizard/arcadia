@@ -402,6 +402,7 @@ CREATE TABLE torrents (
 );
 CREATE TABLE deleted_torrents (
     LIKE torrents INCLUDING CONSTRAINTS, -- INCLUDING DEFAULTS INCLUDING INDEXES,
+    free TEXT, -- Added the new free field here
     deleted_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     deleted_by_id BIGINT NOT NULL,
     reason TEXT NOT NULL,

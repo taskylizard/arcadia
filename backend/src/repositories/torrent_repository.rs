@@ -328,7 +328,8 @@ pub async fn remove_torrent(
 
     sqlx::query!(
         r#"
-        INSERT INTO deleted_torrents (SELECT *, NOW() AS deleted_at, $1 AS deleted_by_id, $2 AS reason FROM torrents WHERE id = $3);
+        INSERT INTO deleted_torrents (id, upload_factor, download_factor, seeders, leechers, completed, snatched, edition_group_id, created_at, updated_at, created_by_id, info_hash, info_dict, languages, release_name, release_group, description, file_amount_per_type, uploaded_as_anonymous, file_list, mediainfo, trumpable, staff_checked, container, size, duration, audio_codec, audio_bitrate, audio_bitrate_sampling, audio_channels, video_codec, features, subtitle_languages, video_resolution, free, deleted_at, deleted_by_id, reason)
+        SELECT *, NOW() AS deleted_at, $1 AS deleted_by_id, $2 AS reason FROM torrents WHERE id = $3;
         "#,
         current_user_id,
         torrent_to_delete.reason,

@@ -2,6 +2,10 @@
 ALTER TABLE torrents
 ADD COLUMN free TEXT;
 
+-- Add free field to deleted_torrents table
+ALTER TABLE deleted_torrents
+ADD COLUMN free TEXT;
+
 -- Also update the torrents_and_reports view to include the new free field
 DROP VIEW torrents_and_reports;
 
