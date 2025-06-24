@@ -91,6 +91,12 @@
             <BBCodeRenderer :content="slotProps.data.description" />
           </AccordionContent>
         </AccordionPanel>
+        <AccordionPanel v-if="slotProps.data.free" value="5">
+          <AccordionHeader>{{ t('torrent.free_field') }}</AccordionHeader>
+          <AccordionContent>
+            <BBCodeRenderer :content="slotProps.data.free" />
+          </AccordionContent>
+        </AccordionPanel>
         <AccordionPanel value="1">
           <AccordionHeader>Mediainfo</AccordionHeader>
           <AccordionContent>

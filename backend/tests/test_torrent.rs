@@ -74,6 +74,7 @@ async fn test_upload_torrent(pool: PgPool) {
     form.add_text("features", "DV,HDR");
     form.add_text("subtitle_languages", "English,French");
     form.add_text("video_resolution", "1080p");
+    form.add_text("free", "This is a test free field");
 
     let torrent_data = bytes::Bytes::from_static(include_bytes!(
         "data/debian-12.10.0-i386-netinst.iso.torrent"
@@ -105,6 +106,7 @@ async fn test_upload_torrent(pool: PgPool) {
     struct Torrent {
         edition_group_id: i64,
         created_by_id: i64,
+        free: Option<String>,
     }
 
     let torrent = common::call_and_read_body_json_with_status::<Torrent, _>(
@@ -116,4 +118,5 @@ async fn test_upload_torrent(pool: PgPool) {
 
     assert_eq!(torrent.edition_group_id, 1);
     assert_eq!(torrent.created_by_id, 2);
+    assert_eq!(torrent.free, Some("This is a test free field".to_string()));
 }

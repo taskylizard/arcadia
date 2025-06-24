@@ -33,12 +33,12 @@ pub async fn create_torrent(
             file_amount_per_type, uploaded_as_anonymous, file_list, mediainfo, trumpable,
             staff_checked, size, duration, audio_codec, audio_bitrate, audio_bitrate_sampling,
             audio_channels, video_codec, features, subtitle_languages, video_resolution, container,
-            languages, info_hash, info_dict
+            languages, info_hash, info_dict, free
         ) VALUES (
             $1, $2, $3, $4, $5, $6, $7,
             $8, $9, $10, $11, $12, $13,
             $14::audio_codec_enum, $15, $16::audio_bitrate_sampling_enum,
-            $17::audio_channels_enum, $18::video_codec_enum, $19::features_enum[], $20::language_enum[], $21, $22, $23::language_enum[], $24::bytea, $25::bytea
+            $17::audio_channels_enum, $18::video_codec_enum, $19::features_enum[], $20::language_enum[], $21, $22, $23::language_enum[], $24::bytea, $25::bytea, $26
         )
         RETURNING *
     "#;
@@ -134,6 +134,7 @@ pub async fn create_torrent(
         )
         .bind(info_hash.as_ref())
         .bind(info.to_bytes())
+        .bind(torrent_form.free.as_deref())
         .fetch_one(&mut *tx)
         .await
         .map_err(Error::CouldNotCreateTorrent)?;

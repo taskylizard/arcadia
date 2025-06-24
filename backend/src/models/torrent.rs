@@ -235,6 +235,7 @@ pub struct Torrent {
     pub staff_checked: bool,
     pub languages: Vec<Language>, // (fallback to original language) (english, french, etc.)
     pub container: String, // container of the main file (ex: if mkv movie and srt subs, mkv is the main)
+    pub free: Option<String>, // user-defined free text field
     pub size: i64,         // in bytes
     // ---- audio
     pub duration: Option<i32>, // in seconds
@@ -293,6 +294,8 @@ pub struct UploadedTorrent {
     pub subtitle_languages: Text<String>,
     #[schema(value_type = String)]
     pub video_resolution: Option<Text<String>>, // ---- video
+    #[schema(value_type = String)]
+    pub free: Option<Text<String>>,
 }
 
 #[derive(Debug, Deserialize, Serialize, ToSchema)]
@@ -377,6 +380,7 @@ pub struct TorrentHierarchyLite {
     pub video_resolution: Option<String>,
     pub reports: Vec<TorrentReport>,
     pub peer_status: Option<TorrentStatus>,
+    pub free: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize, ToSchema, Display)]
@@ -431,6 +435,7 @@ pub struct TorrentHierarchy {
     pub uploader: UserLite,
     pub reports: Vec<TorrentReport>,
     pub peer_status: Option<TorrentStatus>,
+    pub free: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, FromRow, ToSchema)]

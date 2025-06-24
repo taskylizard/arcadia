@@ -49,6 +49,15 @@
             {{ $form.release_name.error?.message }}
           </Message>
         </div>
+        <div>
+          <FloatLabel>
+            <Textarea v-model="torrentForm.free" name="free" class="textarea" autoResize rows="3" />
+            <label for="free">{{ t('torrent.free_field') }}</label>
+          </FloatLabel>
+          <Message v-if="$form.free?.invalid" severity="error" size="small" variant="simple">
+            {{ $form.free.error?.message }}
+          </Message>
+        </div>
         <div class="line">
           <div>
             <FloatLabel>
@@ -256,6 +265,7 @@ const torrentForm = ref({
   audio_bitrate_sampling: null,
   torrent_file: '',
   uploaded_as_anonymous: false,
+  free: '',
 })
 // TODO : move all the selectable* arrays to an helper function
 const selectableVideoCodecs = ['mpeg1', 'mpeg2', 'divX', 'DivX', 'h264', 'h265', 'vc-1', 'vp9', 'BD50', 'UHD100']

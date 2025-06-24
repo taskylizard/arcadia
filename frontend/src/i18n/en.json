@@ -219,7 +219,8 @@
     "multi_language": "Multi-Langauge",
     "trumpable": "Trumpable",
     "mediainfo_autofill": "Mediainfo (will autofill the fields below when possible)",
-    "complete_edition_group_first": "Create or select an edition group first"
+    "complete_edition_group_first": "Create or select an edition group first",
+    "free_field": "Free field"
   },
   "error": {
     "write_more_than_x_chars": "Write more than {0} characters",
